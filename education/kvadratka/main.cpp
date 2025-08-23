@@ -33,6 +33,9 @@ void test(double a, double b, double c, root_number correct_number_of_roots, dou
 
 
 //TODO: 3 files
+//TODO: arrays
+//TODO: loop in unit test
+//TODO: add define to colored words
 
 
 int main()
