@@ -270,6 +270,7 @@ void test(double a, double b, double c, root_number correct_number_of_roots, dou
 }
 
 
+
 void test_solve_equation(void)
 {
     int succeeded = 0, max_succeeded = 0;
