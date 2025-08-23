@@ -1,10 +1,12 @@
 #include "solving_module.h"
 
 
-//TODO: 3 files
-//TODO: arrays
-//TODO: loop in unit test
-//TODO: add define to colored words
+// TODO: arrays (or structs)
+// TODO: loop in unit test
+// TODO: add define to colored words
+// TODO: add const qualifiers to func parameters where necessary
+// TODO: fix -0
+// TODO: reorder functions
 
 
 // bx + c = 0
@@ -17,7 +19,7 @@ root_number solve_linear_equation(double b, double c, double* root)
     if (is_zero(b))
     {
         if (is_zero(c))
-            return INF;
+            return INF_ROOTS;
         return NO_ROOTS;
     }
     else
@@ -61,15 +63,13 @@ root_number solve_square_equation(double a, double b, double c, double* root_1, 
         *root_1 = -b / (2 * a);
         return ONE_ROOT;
     }
-    else if (discriminant > 0)
+    else // if (discriminant > 0)
     {
         double sqrt_discr = sqrt(discriminant);
         *root_1 = (-b - sqrt_discr) / (2 * a);
         *root_2 = (-b + sqrt_discr) / (2 * a);
         return TWO_ROOTS;
     }
-    else
-        return UNKNOWN_NUMBER;
 }
 
 
@@ -95,7 +95,7 @@ root_number solve_equation(double a, double b, double c, double* root_1, double*
 
 bool is_zero(double n)
 {
-    assert(isfinite(n));
+    assert(isfinite(n)); // TODO: is it necessary?
 
     return is_equal(n, 0.0);
 }

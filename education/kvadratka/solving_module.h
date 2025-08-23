@@ -1,10 +1,11 @@
 #ifndef SOLVING_MODULE_H
 #define SOLVING_MODULE_H
 
-#include <stdio.h>
+
 #include <assert.h>
 #include <float.h>
 #include <math.h>
+#include <stdio.h>
 
 
 enum root_number
@@ -12,8 +13,7 @@ enum root_number
     TWO_ROOTS = 2,
     ONE_ROOT = 1,
     NO_ROOTS = 0,
-    INF = -1,
-    UNKNOWN_NUMBER = -2
+    INF_ROOTS = -1
 };
 
 const double EPSILON = 10e-3;

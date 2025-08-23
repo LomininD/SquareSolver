@@ -37,6 +37,8 @@ int main()
 
 void ask_for_new_equations(int* state)
 {
+    assert(state != NULL);
+
     printf("Any new equations? (no - 0, yes - 1): ");
 
     int ans = 0;
@@ -49,7 +51,9 @@ void ask_for_new_equations(int* state)
     }
 
     if (ans)
+    {
         *state = ON;
+    }
     else
     {
         *state = OFF;
@@ -68,7 +72,7 @@ void clear_buffer(void)
 bool check_buffer()
 {
     int c = getchar();
-    return c == EOF || c == '\n';
+    return c == EOF || c == '\n' || c == ' ';
 }
 
 
@@ -83,12 +87,12 @@ void read_koef(double* a, double* b, double* c)
 
     printf("Enter a, b, c parameters for equation ax^2 + bx + c = 0:\n");
 
-    int correct_koef_number = scanf("%lf %lf %lf", a, b, c);
+    int correct_koef_number = scanf("%lg %lg %lg", a, b, c);
     while (correct_koef_number != 3 || !check_buffer())
     {
         printf("Wrong input. Please try again:\n");
         clear_buffer();
-        correct_koef_number = scanf("%lf %lf %lf", a, b, c);
+        correct_koef_number = scanf("%lg %lg %lg", a, b, c);
     }
 }
 
@@ -105,16 +109,17 @@ void print_ans(root_number number_of_roots, double root_1, double root_2)
             break;
         case ONE_ROOT:
             printf("This equation has 1 root:\n");
-            printf("x = %lf\n", root_1);
+            printf("x = %lg\n", root_1);
             break;
         case TWO_ROOTS:
             printf("This equation has 2 roots:\n");
-            printf("x1 = %lf, x2 = %lf\n", root_1, root_2);
+            printf("x1 = %lg, x2 = %lg\n", root_1, root_2);
             break;
-        case INF:
+        case INF_ROOTS:
             printf("This equation has infinite number of roots\n");
             break;
-        case UNKNOWN_NUMBER:
+        default:
             printf("Unexpected error");
+            break;
     }
 }
