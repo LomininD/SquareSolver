@@ -262,10 +262,8 @@ void test(double a, double b, double c, root_number correct_number_of_roots, dou
 
     root_number number_of_roots = solve_equation(a, b, c, &root_1, &root_2);
     if (!(number_of_roots == correct_number_of_roots && is_equal(root_1, correct_root_1) && is_equal(root_2, correct_root_2)))
-    {
         printf("\033[1;31mFAILED\033[0m: solve_equation(%lf, %lf, %lf, &x1, &x2) --> roots: %d, x1 = %lf, x2 = %lf "
         "\n(should be roots: %d, x1 = %lf, x2 = %lf)\n", a, b, c, number_of_roots, root_1, root_2, correct_number_of_roots, correct_root_1, correct_root_2);
-    }
     else
         printf("\033[1;32mOK\033[0m\n");
         *succeeded += 1;
