@@ -239,6 +239,7 @@ bool is_zero(double n)
     return is_equal(n, 0.0);
 }
 
+
 bool is_equal(double a, double b)
 {
     assert(isfinite(a));
@@ -265,10 +266,11 @@ void test(double a, double b, double c, root_number correct_number_of_roots, dou
         printf("\033[1;31mFAILED\033[0m: solve_equation(%lf, %lf, %lf, &x1, &x2) --> roots: %d, x1 = %lf, x2 = %lf "
         "\n(should be roots: %d, x1 = %lf, x2 = %lf)\n", a, b, c, number_of_roots, root_1, root_2, correct_number_of_roots, correct_root_1, correct_root_2);
     else
+    {
         printf("\033[1;32mOK\033[0m\n");
         *succeeded += 1;
+    }
 }
-
 
 
 void test_solve_equation(void)
