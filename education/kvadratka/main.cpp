@@ -8,6 +8,8 @@ enum root_states {NO_ROOTS = 0,
                   UNKNOWN_ERROR = -2};
 
 
+const double EPSILON = 10e-3;
+
 int solve_square_equation(double a, double b, double c, double* root_1, double* root_2);
 int solve_linear_equation(double b, double c, double root_1);
 int solve_equation(double a, double b, double c, double* root_1, double* root_2);
@@ -16,20 +18,17 @@ void print_ans(int number_of_roots, double root_1, double root_2);
 void clear_buffer(void);
 double calculate_discriminant(double a, double b, double c);
 int is_equal(double a, double b);
-
-
-
-// git hub
+int is_zero(double n);
 
 
 int main()
 {
-    double a_koef = 0, b_koef = 0, c_koef = 0, root_1 = 0, root_2 = 0;
-    int number_of_roots = 0;
+    double a_koef = 0, b_koef = 0, c_koef = 0;
 
-    get_koef(&a_koef, &b_koef, &c_koef);
+    get_koef(&a_koef, &b_koef, &c_koef); // TODO: solve several equations
 
-    number_of_roots = solve_equation(a_koef, b_koef, c_koef, &root_1, &root_2);
+    double root_1 = 0, root_2 = 0;
+    int number_of_roots = solve_equation(a_koef, b_koef, c_koef, &root_1, &root_2);
 
     print_ans(number_of_roots, root_1, root_2);
     return 0;
@@ -45,8 +44,6 @@ void clear_buffer(void)
 
 void get_koef(double* a, double* b, double* c)
 {
-    int correct_koef_number = 0;
-
     assert(a != NULL);
     assert(b != NULL);
     assert(c != NULL);
@@ -54,8 +51,8 @@ void get_koef(double* a, double* b, double* c)
     printf("+++ Square Equation Solver +++\n");
     printf("Enter a, b, c parameters for equation ax^2 + bx + c = 0:\n");
 
-    correct_koef_number = scanf("%lf %lf %lf", a, b, c);
-    while (correct_koef_number != 3)
+    int correct_koef_number = scanf("%lf %lf %lf", a, b, c);
+    while (correct_koef_number != 3) // TODO: check input buffer
     {
         printf("Wrong input. Please try again:\n");
         clear_buffer();
@@ -74,7 +71,7 @@ void print_ans(int number_of_roots, double root_1, double root_2)
         case NO_ROOTS:
             printf("This equation does not have any roots\n");
             break;
-        case 1:
+        case 1: // TODO: ONE_ROOT, TWO_ROOTS
             printf("This equation has 1 root:\n");
             printf("x = %lf\n", root_1);
             break;
@@ -98,16 +95,16 @@ int solve_linear_equation(double b, double c, double* root)
     assert(!isinf(b));
     assert(!isinf(c));
 
-    if (is_equal (b, (double) 0))
+    if (is_zero(b))
     {
-        if (is_equal (c, (double) 0))
+        if (is_zero(c))
             return INF;
         return NO_ROOTS;
     }
     else
     {
         *root = -c / b;
-        return 1;
+        return 1; // TODO: ONE_ROOT
     }
 }
 
@@ -118,7 +115,7 @@ double calculate_discriminant(double a, double b, double c)
     assert(!isinf(b));
     assert(!isinf(c));
 
-    double d = b*b - 4 * a*c;
+    double d = b * b - 4 * a * c;
     return d;
 }
 
@@ -126,25 +123,23 @@ double calculate_discriminant(double a, double b, double c)
 // ax^2 + bx + c = 0
 int solve_square_equation(double a, double b, double c, double* root_1, double* root_2)
 {
-    double discriminant = 0;
-
     assert(!isinf(a));
     assert(!isinf(b));
     assert(!isinf(c));
     assert(root_1 != NULL);
     assert(root_2 != NULL);
-    assert(a != 0); // isequal
+    assert(!is_zero(a));
 
-    discriminant = calculate_discriminant(a, b, c);
+    double discriminant = calculate_discriminant(a, b, c);
 
     if (discriminant < 0)
     {
         return NO_ROOTS;
     }
-    else if (is_equal (discriminant, (double) 0))
+    else if (is_zero(discriminant))
     {
         *root_1 = -b / (2 * a);
-        return 1;
+        return 1; // TODO: ONE_ROOT
     }
     else if (discriminant > 0)
     {
@@ -166,11 +161,21 @@ int solve_equation(double a, double b, double c, double* root_1, double* root_2)
     assert(root_2 != NULL);
 
     int number_of_roots = 0;
-    if (is_equal(a, (double) 0))
+
+    if (is_zero(a))
         number_of_roots = solve_linear_equation(b, c, root_1);
     else
         number_of_roots = solve_square_equation(a, b, c, root_1, root_2);
+
     return number_of_roots;
+}
+
+
+int is_zero(double n)
+{
+    assert(!isinf(n));
+
+    return is_equal(n, (double) 0);
 }
 
 
@@ -179,5 +184,5 @@ int is_equal(double a, double b)
     assert(!isinf(a));
     assert(!isinf(b));
 
-    return fabs(a - b) < DBL_EPSILON;
+    return fabs(a - b) < EPSILON; // 10e-3
 }
