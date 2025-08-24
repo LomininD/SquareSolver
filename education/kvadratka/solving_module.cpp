@@ -11,11 +11,15 @@
 
 
 // bx + c = 0
-root_number solve_linear_equation(double b, double c, double* root)
+root_number solve_linear_equation(square_equation_data* data)
 {
-    assert(root != NULL);
-    assert(isfinite(b));
-    assert(isfinite(c));
+    assert(data != NULL);
+    assert(isfinite((*data).b));
+    assert(isfinite((*data).c));
+    assert(isfinite((*data).root_1));
+
+    double b = (*data).b;
+    double c = (*data).c;
 
     if (is_zero(b))
     {
@@ -26,7 +30,7 @@ root_number solve_linear_equation(double b, double c, double* root)
     else
     {
         double raw_root = -c / b;
-        *root = inspect_zero_root(raw_root);
+        (*data).root_1 = inspect_zero_root(raw_root);
         return ONE_ROOT;
     }
 }
@@ -52,15 +56,19 @@ double calculate_discriminant(double a, double b, double c)
 
 
 // ax^2 + bx + c = 0
-root_number solve_square_equation(double a, double b, double c, double* root_1, double* root_2)
+root_number solve_square_equation(square_equation_data* data)
 {
-    assert(isfinite(a));
-    assert(isfinite(b));
-    assert(isfinite(c));
-    assert(root_1 != NULL);
-    assert(root_2 != NULL);
-    assert(!is_zero(a));
-    assert(root_1 != root_2);
+    assert(isfinite((*data).a));
+    assert(isfinite((*data).b));
+    assert(isfinite((*data).c));
+    assert(isfinite((*data).root_1));
+    assert(isfinite((*data).root_2));
+    assert(data != NULL);
+
+    double a = (*data).a;
+    double b = (*data).b;
+    double c = (*data).c;
+
 
     double discriminant = calculate_discriminant(a, b, c);
 
@@ -71,7 +79,7 @@ root_number solve_square_equation(double a, double b, double c, double* root_1, 
     else if (is_zero(discriminant))
     {
         double raw_root = -b / (2 * a);
-        *root_1 = inspect_zero_root(raw_root);
+        (*data).root_1 = inspect_zero_root(raw_root);
         return ONE_ROOT;
     }
     else // if (discriminant > 0)
@@ -81,29 +89,28 @@ root_number solve_square_equation(double a, double b, double c, double* root_1, 
         double raw_root1 = (-b - sqrt_discr) / (2 * a);
         double raw_root2 = (-b + sqrt_discr) / (2 * a);
 
-        *root_1 = inspect_zero_root(raw_root1);
-        *root_2 = inspect_zero_root(raw_root2);
+        (*data).root_1 = inspect_zero_root(raw_root1);
+        (*data).root_2 = inspect_zero_root(raw_root2);
         return TWO_ROOTS;
     }
 }
 
 
-root_number solve_equation(double a, double b, double c, double* root_1, double* root_2)
+root_number solve_equation(square_equation_data* data)
 {
-    assert(isfinite(a));
-    assert(isfinite(b));
-    assert(isfinite(c));
-    assert(root_1 != NULL);
-    assert(root_2 != NULL);
-    assert(root_1 != root_2);
+    assert(isfinite((*data).a));
+    assert(isfinite((*data).b));
+    assert(isfinite((*data).c));
+    assert(isfinite((*data).root_1)); // TODO: !!!
+    assert(isfinite((*data).root_2));
+    assert(data != NULL);
 
     root_number number_of_roots = NO_ROOTS;
 
-    if (is_zero(a))
-        number_of_roots = solve_linear_equation(b, c, root_1);
+    if (is_zero((*data).a))
+        number_of_roots = solve_linear_equation(data);
     else
-        number_of_roots = solve_square_equation(a, b, c, root_1, root_2);
-
+        number_of_roots = solve_square_equation(data);
     return number_of_roots;
 }
 
@@ -124,3 +131,5 @@ bool is_equal(double a, double b)
 
     return fabs(a - b) < EPSILON; // 10e-3
 }
+
+

@@ -5,8 +5,8 @@
 enum program_states {OFF, ON};
 
 
-void read_koef(double* a, double* b, double* c);
-void print_ans(root_number number_of_roots, double root_1, double root_2);
+void read_koef(double koefs[]);
+void print_ans(root_number number_of_roots, square_equation_data data);
 void clear_buffer(void);
 bool check_buffer();
 void ask_for_new_equations(int* state);
@@ -14,21 +14,22 @@ void ask_for_new_equations(int* state);
 
 int main()
 {
-    double a_koef = 0, b_koef = 0, c_koef = 0;
+    double koefs[3] = {};
+
     int program_state = ON;
 
     printf(BOLD "+++ Square Equation Solver +++\n\n" RESET_FONT);
 
-    root_number number_of_roots = NO_ROOTS;
-
     while (program_state == ON)
     {
-        read_koef(&a_koef, &b_koef, &c_koef);
+        read_koef(koefs);
 
         double root_1 = 0, root_2 = 0;
-        number_of_roots = solve_equation(a_koef, b_koef, c_koef, &root_1, &root_2);
+        square_equation_data data = {koefs[0], koefs[1], koefs[2], root_1, root_2};
 
-        print_ans(number_of_roots, root_1, root_2);
+        root_number number_of_roots = solve_equation(&data);
+
+        print_ans(number_of_roots, data);
 
         ask_for_new_equations(&program_state);
     }
@@ -77,31 +78,26 @@ bool check_buffer()
 }
 
 
-void read_koef(double* a, double* b, double* c)
+void read_koef(double koefs[])
 {
-    assert(a != NULL);
-    assert(b != NULL);
-    assert(c != NULL);
-    assert(a != b);
-    assert(a != c);
-    assert(b != c);
+    assert(koefs != NULL);
 
     printf("Enter a, b, c parameters for equation ax^2 + bx + c = 0:\n");
 
-    int correct_koef_number = scanf("%lg %lg %lg", a, b, c);
+    int correct_koef_number = scanf("%lg %lg %lg", &koefs[0], &koefs[1], &koefs[2]);
     while (correct_koef_number != 3 || !check_buffer())
     {
         printf("Wrong input. Please try again:\n");
         clear_buffer();
-        correct_koef_number = scanf("%lg %lg %lg", a, b, c);
+        correct_koef_number = scanf("%lg %lg %lg", &koefs[0], &koefs[1], &koefs[2]);
     }
 }
 
 
-void print_ans(root_number number_of_roots, double root_1, double root_2)
+void print_ans(root_number number_of_roots, square_equation_data data)
 {
-    assert(isfinite(root_1));
-    assert(isfinite(root_2));
+    assert(isfinite(data.root_1));
+    assert(isfinite(data.root_2));
 
     switch (number_of_roots)
     {
@@ -110,11 +106,11 @@ void print_ans(root_number number_of_roots, double root_1, double root_2)
             break;
         case ONE_ROOT:
             printf("This equation has 1 root:\n");
-            printf("x = %lg\n", root_1);
+            printf("x = %lg\n", data.root_1);
             break;
         case TWO_ROOTS:
             printf("This equation has 2 roots:\n");
-            printf("x1 = %lg, x2 = %lg\n", root_1, root_2);
+            printf("x1 = %lg, x2 = %lg\n", data.root_1, data.root_2);
             break;
         case INF_ROOTS:
             printf("This equation has infinite number of roots\n");

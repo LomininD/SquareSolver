@@ -17,11 +17,22 @@ enum root_number
 };
 
 
+struct square_equation_data
+{
+    const double a;
+    const double b;
+    const double c;
+    double root_1;
+    double root_2;
+};
+
+
+
 const double EPSILON = 10e-3;
 
-root_number solve_square_equation(double a, double b, double c, double* root_1, double* root_2);
-root_number solve_linear_equation(double b, double c, double* root_1);
-root_number solve_equation(double a, double b, double c, double* root_1, double* root_2);
+root_number solve_square_equation(square_equation_data* data);
+root_number solve_linear_equation(square_equation_data* data);
+root_number solve_equation(square_equation_data* data);
 double calculate_discriminant(double a, double b, double c);
 bool is_equal(double a, double b);
 bool is_zero(double n);
