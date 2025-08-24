@@ -16,6 +16,7 @@ enum root_number
     INF_ROOTS = -1
 };
 
+
 const double EPSILON = 10e-3;
 
 root_number solve_square_equation(double a, double b, double c, double* root_1, double* root_2);
@@ -24,5 +25,7 @@ root_number solve_equation(double a, double b, double c, double* root_1, double*
 double calculate_discriminant(double a, double b, double c);
 bool is_equal(double a, double b);
 bool is_zero(double n);
+double inspect_zero_root(double raw_root);
+
 
 #endif

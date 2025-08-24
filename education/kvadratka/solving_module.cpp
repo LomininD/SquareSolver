@@ -2,11 +2,12 @@
 
 
 // TODO: arrays (or structs)
-// TODO: loop in unit test
-// TODO: add define to colored words
+// TODO: loop in unit test (after structs)
 // TODO: add const qualifiers to func parameters where necessary
-// TODO: fix -0
 // TODO: reorder functions
+// TODO: add unit test (after structs)
+// TODO: delete pointers in test (after structs)
+// TODO: delete pointers in programm state
 
 
 // bx + c = 0
@@ -24,9 +25,18 @@ root_number solve_linear_equation(double b, double c, double* root)
     }
     else
     {
-        *root = -c / b;
+        double raw_root = -c / b;
+        *root = inspect_zero_root(raw_root);
         return ONE_ROOT;
     }
+}
+
+
+double inspect_zero_root(double raw_root)
+{
+    if (is_zero(raw_root))
+            raw_root = 0.0;
+    return raw_root;
 }
 
 
@@ -60,14 +70,19 @@ root_number solve_square_equation(double a, double b, double c, double* root_1, 
     }
     else if (is_zero(discriminant))
     {
-        *root_1 = -b / (2 * a);
+        double raw_root = -b / (2 * a);
+        *root_1 = inspect_zero_root(raw_root);
         return ONE_ROOT;
     }
     else // if (discriminant > 0)
     {
         double sqrt_discr = sqrt(discriminant);
-        *root_1 = (-b - sqrt_discr) / (2 * a);
-        *root_2 = (-b + sqrt_discr) / (2 * a);
+
+        double raw_root1 = (-b - sqrt_discr) / (2 * a);
+        double raw_root2 = (-b + sqrt_discr) / (2 * a);
+
+        *root_1 = inspect_zero_root(raw_root1);
+        *root_2 = inspect_zero_root(raw_root2);
         return TWO_ROOTS;
     }
 }
@@ -95,7 +110,8 @@ root_number solve_equation(double a, double b, double c, double* root_1, double*
 
 bool is_zero(double n)
 {
-    assert(isfinite(n)); // TODO: is it necessary?
+    if (!isfinite(n))
+        return false;
 
     return is_equal(n, 0.0);
 }

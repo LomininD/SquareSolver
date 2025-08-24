@@ -1,4 +1,5 @@
 #include "solving_module.h"
+#include "font_styles.h"
 
 
 enum program_states {OFF, ON};
@@ -16,7 +17,7 @@ int main()
     double a_koef = 0, b_koef = 0, c_koef = 0;
     int program_state = ON;
 
-    printf("\033[1m+++ Square Equation Solver +++\033[0m\n\n");
+    printf(BOLD "+++ Square Equation Solver +++\n\n" RESET_FONT);
 
     root_number number_of_roots = NO_ROOTS;
 
