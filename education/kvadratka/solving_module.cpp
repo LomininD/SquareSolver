@@ -1,12 +1,8 @@
 #include "solving_module.h"
 
 
-// TODO: arrays (or structs)
-// TODO: loop in unit test (after structs)
 // TODO: add const qualifiers to func parameters where necessary
 // TODO: reorder functions
-// TODO: add unit test (after structs)
-// TODO: delete pointers in test (after structs)
 // TODO: delete pointers in programm state
 
 
