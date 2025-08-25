@@ -1,32 +1,37 @@
 #include "solving_module.h"
 
 
+#define ROOT_1 data -> root_1
+#define ROOT_2 data -> root_2
+
+
 // TODO: add const qualifiers to func parameters where necessary
 // TODO: reorder functions
 // TODO: delete pointers in programm state
+// TODO: (!!!) tests from file
+// TODO: (!!!) command line arguments (argc argv)
+// TODO: make file tutorial.com
+// TODO: add Nan - think about it
+// TODO: add double check equation - think about it
 
 
 // bx + c = 0
 root_number solve_linear_equation(square_equation_data* data)
 {
     assert(data != NULL);
-    assert(isfinite((*data).b));
-    assert(isfinite((*data).c));
-    assert(isfinite((*data).root_1));
+    assert(isfinite(B_KOEF));
+    assert(isfinite(C_KOEF));
 
-    double b = (*data).b;
-    double c = (*data).c;
-
-    if (is_zero(b))
+    if (is_zero(B_KOEF))
     {
-        if (is_zero(c))
+        if (is_zero(C_KOEF))
             return INF_ROOTS;
         return NO_ROOTS;
     }
     else
     {
-        double raw_root = -c / b;
-        (*data).root_1 = inspect_zero_root(raw_root);
+        double raw_root = -C_KOEF / B_KOEF;
+        ROOT_1 = inspect_zero_root(raw_root);
         return ONE_ROOT;
     }
 }
@@ -54,19 +59,12 @@ double calculate_discriminant(double a, double b, double c)
 // ax^2 + bx + c = 0
 root_number solve_square_equation(square_equation_data* data)
 {
-    assert(isfinite((*data).a));
-    assert(isfinite((*data).b));
-    assert(isfinite((*data).c));
-    assert(isfinite((*data).root_1));
-    assert(isfinite((*data).root_2));
     assert(data != NULL);
+    assert(isfinite(A_KOEF));
+    assert(isfinite(B_KOEF));
+    assert(isfinite(C_KOEF));
 
-    double a = (*data).a;
-    double b = (*data).b;
-    double c = (*data).c;
-
-
-    double discriminant = calculate_discriminant(a, b, c);
+    double discriminant = calculate_discriminant(A_KOEF, B_KOEF, C_KOEF);
 
     if (discriminant < 0)
     {
@@ -74,19 +72,19 @@ root_number solve_square_equation(square_equation_data* data)
     }
     else if (is_zero(discriminant))
     {
-        double raw_root = -b / (2 * a);
-        (*data).root_1 = inspect_zero_root(raw_root);
+        double raw_root = -B_KOEF / (2 * A_KOEF);
+        ROOT_1 = inspect_zero_root(raw_root);
         return ONE_ROOT;
     }
     else // if (discriminant > 0)
     {
         double sqrt_discr = sqrt(discriminant);
 
-        double raw_root1 = (-b - sqrt_discr) / (2 * a);
-        double raw_root2 = (-b + sqrt_discr) / (2 * a);
+        double raw_root1 = (-B_KOEF - sqrt_discr) / (2 * A_KOEF);
+        double raw_root2 = (-B_KOEF + sqrt_discr) / (2 * A_KOEF);
 
-        (*data).root_1 = inspect_zero_root(raw_root1);
-        (*data).root_2 = inspect_zero_root(raw_root2);
+        ROOT_1 = inspect_zero_root(raw_root1);
+        ROOT_2 = inspect_zero_root(raw_root2);
         return TWO_ROOTS;
     }
 }
@@ -94,16 +92,12 @@ root_number solve_square_equation(square_equation_data* data)
 
 root_number solve_equation(square_equation_data* data)
 {
-    assert(isfinite((*data).a));
-    assert(isfinite((*data).b));
-    assert(isfinite((*data).c));
-    assert(isfinite((*data).root_1)); // TODO: !!!
-    assert(isfinite((*data).root_2));
     assert(data != NULL);
+    assert(isfinite(A_KOEF));
 
     root_number number_of_roots = NO_ROOTS;
 
-    if (is_zero((*data).a))
+    if (is_zero(A_KOEF))
         number_of_roots = solve_linear_equation(data);
     else
         number_of_roots = solve_square_equation(data);

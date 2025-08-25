@@ -9,7 +9,7 @@ void read_koef(double koefs[]);
 void print_ans(root_number number_of_roots, square_equation_data data);
 void clear_buffer(void);
 bool check_buffer();
-void ask_for_new_equations(int* state);
+program_states ask_for_new_equations(void);
 
 
 int main()
@@ -31,15 +31,14 @@ int main()
 
         print_ans(number_of_roots, data);
 
-        ask_for_new_equations(&program_state);
+        program_state = ask_for_new_equations();
     }
     return 0;
 }
 
 
-void ask_for_new_equations(int* state)
+program_states ask_for_new_equations(void)
 {
-    assert(state != NULL);
 
     printf("Any new equations? (no - 0, yes - 1): ");
 
@@ -54,12 +53,12 @@ void ask_for_new_equations(int* state)
 
     if (ans)
     {
-        *state = ON;
+        return ON;
     }
     else
     {
-        *state = OFF;
         printf("I\'ll be back...\n");
+        return OFF;
     }
 }
 
@@ -71,10 +70,11 @@ void clear_buffer(void)
 }
 
 
+// TODO: fix "1 " - should not be banned
 bool check_buffer()
 {
     int c = getchar();
-    return c == EOF || c == '\n' || c == ' ';
+    return c == EOF || c == '\n';
 }
 
 

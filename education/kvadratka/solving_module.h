@@ -2,6 +2,11 @@
 #define SOLVING_MODULE_H
 
 
+#define A_KOEF data -> a
+#define B_KOEF data -> b
+#define C_KOEF data -> c
+
+
 #include <assert.h>
 #include <float.h>
 #include <math.h>
