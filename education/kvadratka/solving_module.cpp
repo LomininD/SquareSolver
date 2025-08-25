@@ -5,18 +5,18 @@
 #define ROOT_2 data -> root_2
 
 
-// TODO: add const qualifiers to func parameters where necessary
+// TODO: add const qualifiers to func parameters where necessary ask about it (done)
 // TODO: reorder functions
-// TODO: delete pointers in programm state
 // TODO: (!!!) tests from file
 // TODO: (!!!) command line arguments (argc argv)
 // TODO: make file tutorial.com
-// TODO: add Nan - think about it
+// TODO: add NAN - think about it
 // TODO: add double check equation - think about it
+// TODO: fix input bugs (done)
 
 
 // bx + c = 0
-root_number solve_linear_equation(square_equation_data* data)
+root_number solve_linear_equation(square_equation_data* const data)
 {
     assert(data != NULL);
     assert(isfinite(B_KOEF));
@@ -57,7 +57,7 @@ double calculate_discriminant(double a, double b, double c)
 
 
 // ax^2 + bx + c = 0
-root_number solve_square_equation(square_equation_data* data)
+root_number solve_square_equation(square_equation_data* const data)
 {
     assert(data != NULL);
     assert(isfinite(A_KOEF));
@@ -90,7 +90,7 @@ root_number solve_square_equation(square_equation_data* data)
 }
 
 
-root_number solve_equation(square_equation_data* data)
+root_number solve_equation(square_equation_data* const data)
 {
     assert(data != NULL);
     assert(isfinite(A_KOEF));

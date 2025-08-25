@@ -33,7 +33,7 @@ const test_data tests[] = {
 
 
 void test_solve_equation(void);
-int test(const test_data* data);
+int test(const test_data* const data);
 
 
 int main()
@@ -46,7 +46,7 @@ int main()
 }
 
 
-int test(const test_data* data)
+int test(const test_data* const data)
 {
     assert(data != NULL);
 

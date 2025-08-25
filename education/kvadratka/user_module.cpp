@@ -5,7 +5,7 @@
 enum program_states {OFF, ON};
 
 
-void read_koef(double koefs[]);
+void read_koef(double koefs[]); // do I need const here?
 void print_ans(root_number number_of_roots, square_equation_data data);
 void clear_buffer(void);
 bool check_buffer();
@@ -70,11 +70,13 @@ void clear_buffer(void)
 }
 
 
-// TODO: fix "1 " - should not be banned
 bool check_buffer()
 {
-    int c = getchar();
-    return c == EOF || c == '\n';
+    int c = 0;
+    while ((c = getchar()) != EOF && c != '\n')
+        if (c != ' ' && c != '\n' && c != '\t')
+            return false;
+    return true;
 }
 
 
