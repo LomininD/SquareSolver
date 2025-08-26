@@ -5,14 +5,16 @@
 #define ROOT_2 data -> root_2
 
 
-// TODO: add const qualifiers to func parameters where necessary ask about it (done)
 // TODO: reorder functions
-// TODO: (!!!) tests from file
+// TODO: tests (done)
 // TODO: (!!!) command line arguments (argc argv)
 // TODO: make file tutorial.com
-// TODO: add NAN - think about it
 // TODO: add double check equation - think about it
-// TODO: fix input bugs (done)
+// TODO: static
+// TODO: define color functions
+// TODO: commit github + meow
+// TODO: diagram for readme (drawio)
+
 
 
 // bx + c = 0
@@ -57,7 +59,7 @@ double calculate_discriminant(double a, double b, double c)
 
 
 // ax^2 + bx + c = 0
-root_number solve_square_equation(square_equation_data* const data)
+root_number solve_square_equation(square_equation_data* const data) // TODO: name check
 {
     assert(data != NULL);
     assert(isfinite(A_KOEF));

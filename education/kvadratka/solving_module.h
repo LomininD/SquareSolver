@@ -32,7 +32,6 @@ struct square_equation_data
 };
 
 
-
 const double EPSILON = 10e-3;
 
 root_number solve_square_equation(square_equation_data* const data);

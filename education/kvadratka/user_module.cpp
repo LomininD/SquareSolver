@@ -5,7 +5,7 @@
 enum program_states {OFF, ON};
 
 
-void read_koef(double koefs[]); // do I need const here?
+void read_koef(double* const koefs); // do I need const here?
 void print_ans(root_number number_of_roots, square_equation_data data);
 void clear_buffer(void);
 bool check_buffer();
@@ -39,7 +39,6 @@ int main()
 
 program_states ask_for_new_equations(void)
 {
-
     printf("Any new equations? (no - 0, yes - 1): ");
 
     int ans = 0;
@@ -80,9 +79,9 @@ bool check_buffer()
 }
 
 
-void read_koef(double koefs[])
+void read_koef(double* const koefs)
 {
-    assert(koefs != NULL);
+    // TODO: add asserts
 
     printf("Enter a, b, c parameters for equation ax^2 + bx + c = 0:\n");
 
