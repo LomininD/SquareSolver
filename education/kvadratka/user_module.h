@@ -2,10 +2,10 @@
 #define USER_MODULE_H
 
 
-#include "solving_module.h"
 #include "font_styles.h"
+#include "solving_module.h"
 
 
-void run_user_inteface(void);
+void run_user_interface(void);
 
 #endif

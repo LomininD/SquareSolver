@@ -2,8 +2,9 @@
 #define TEST_MODULE_H
 
 
-#include "solving_module.h"
 #include "font_styles.h"
+#include "solving_module.h"
+#include <string.h>
 
 
 struct test_data

@@ -22,7 +22,7 @@ enum root_number
 };
 
 
-struct square_equation_data
+struct quadratic_equation_data
 {
     const double a;
     const double b;
@@ -35,7 +35,7 @@ struct square_equation_data
 const double EPSILON = 10e-3;
 
 
-root_number solve_equation(square_equation_data* const data);
+root_number solve_equation(quadratic_equation_data* const data);
 bool is_equal(double a, double b);
 
 

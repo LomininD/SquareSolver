@@ -4,68 +4,39 @@
 #define ROOT_1 data -> root_1
 #define ROOT_2 data -> root_2
 
+
+// TODO: reorder function declaration 
 // TODO: doxygen
-// TODO: reorder functions
-// TODO: (!!!) command line arguments (argc argv)
+// TODO: reorder functions (done)
+// TODO: (!!!) command line arguments (argc argv) (done)
 // TODO: make file
-// TODO: add double check equation - think about it
-// TODO: define color functions (done)
-// TODO: commit github + meow
 // TODO: diagram for readme (drawio)
-// TODO: move function declaration from h to cpp + add static (done)
-// fixed read from file bug
 
 
 static double calculate_discriminant(double a, double b, double c);
 static bool is_zero(double n);
 static double inspect_zero_root(double raw_root);
-static root_number solve_square_equation(square_equation_data* const data);
-static root_number solve_linear_equation(square_equation_data* const data);
+static root_number solve_quadratic_equation(quadratic_equation_data* const data);
+static root_number solve_linear_equation(quadratic_equation_data* const data);
 
 
-// bx + c = 0
-static root_number solve_linear_equation(square_equation_data* const data)
+root_number solve_equation(quadratic_equation_data* const data)
 {
     assert(data != NULL);
-    assert(isfinite(B_KOEF));
-    assert(isfinite(C_KOEF));
+    assert(isfinite(A_KOEF));
 
-    if (is_zero(B_KOEF))
-    {
-        if (is_zero(C_KOEF))
-            return INF_ROOTS;
-        return NO_ROOTS;
-    }
+    root_number number_of_roots = NO_ROOTS;
+
+    if (is_zero(A_KOEF))
+        number_of_roots = solve_linear_equation(data);
     else
-    {
-        double raw_root = -C_KOEF / B_KOEF;
-        ROOT_1 = inspect_zero_root(raw_root);
-        return ONE_ROOT;
-    }
-}
-
-
-static double inspect_zero_root(double raw_root)
-{
-    if (is_zero(raw_root))
-            raw_root = 0.0;
-    return raw_root;
-}
-
-
-static double calculate_discriminant(double a, double b, double c)
-{
-    assert(isfinite(a));
-    assert(isfinite(b));
-    assert(isfinite(c));
-
-    double d = b * b - 4 * a * c;
-    return d;
+        number_of_roots = solve_quadratic_equation(data);
+    return number_of_roots;
 }
 
 
 // ax^2 + bx + c = 0
-static root_number solve_square_equation(square_equation_data* const data) // TODO: name check
+static root_number solve_quadratic_equation(quadratic_equation_data* const data)
 {
     assert(data != NULL);
     assert(isfinite(A_KOEF));
@@ -98,27 +69,44 @@ static root_number solve_square_equation(square_equation_data* const data) // TO
 }
 
 
-root_number solve_equation(square_equation_data* const data)
+// bx + c = 0
+static root_number solve_linear_equation(quadratic_equation_data* const data)
 {
     assert(data != NULL);
-    assert(isfinite(A_KOEF));
+    assert(isfinite(B_KOEF));
+    assert(isfinite(C_KOEF));
 
-    root_number number_of_roots = NO_ROOTS;
-
-    if (is_zero(A_KOEF))
-        number_of_roots = solve_linear_equation(data);
+    if (is_zero(B_KOEF))
+    {
+        if (is_zero(C_KOEF))
+            return INF_ROOTS;
+        return NO_ROOTS;
+    }
     else
-        number_of_roots = solve_square_equation(data);
-    return number_of_roots;
+    {
+        double raw_root = -C_KOEF / B_KOEF;
+        ROOT_1 = inspect_zero_root(raw_root);
+        return ONE_ROOT;
+    }
 }
 
 
-static bool is_zero(double n)
+static double calculate_discriminant(double a, double b, double c)
 {
-    if (!isfinite(n))
-        return false;
+    assert(isfinite(a));
+    assert(isfinite(b));
+    assert(isfinite(c));
 
-    return is_equal(n, 0.0);
+    double d = b * b - 4 * a * c;
+    return d;
+}
+
+
+static double inspect_zero_root(double raw_root)
+{
+    if (is_zero(raw_root))
+            raw_root = 0.0;
+    return raw_root;
 }
 
 
@@ -131,3 +119,10 @@ bool is_equal(double a, double b)
 }
 
 
+static bool is_zero(double n)
+{
+    if (!isfinite(n))
+        return false;
+
+    return is_equal(n, 0.0);
+}

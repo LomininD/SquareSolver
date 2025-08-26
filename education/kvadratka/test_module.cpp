@@ -1,8 +1,5 @@
-#include "test_module.h"
 #include <stdlib.h>
-#include <string.h>
-
-// TODO: reorder
+#include "test_module.h"
 
 
 #define ROOT_1_REF data -> correct_root_1
@@ -72,6 +69,19 @@ static root_number str_to_root_number(char str[])
 }
 
 
+static void test_solve_equation(test_data* tests, int number_of_tests)
+{
+    assert(tests != NULL);
+
+    int succeeded = 0;
+
+    for (int i = 0; i < number_of_tests; ++i)
+        succeeded += test(&tests[i]);
+
+    printf(MAKE_BOLD("Passed %d/%d\n"), succeeded, number_of_tests);
+}
+
+
 static int test(test_data* data)
 {
     assert(data != NULL);
@@ -83,7 +93,7 @@ static int test(test_data* data)
 
     double root_1 = 0, root_2 = 0;
 
-    square_equation_data data_square = {A_KOEF, B_KOEF, C_KOEF, root_1, root_2};
+    quadratic_equation_data data_square = {A_KOEF, B_KOEF, C_KOEF, root_1, root_2};
 
     root_number number_of_roots = solve_equation(&data_square);
 
@@ -106,18 +116,3 @@ static int test(test_data* data)
         return 1;
     }
 }
-
-
-
-static void test_solve_equation(test_data* tests, int number_of_tests)
-{
-    assert(tests != NULL);
-
-    int succeeded = 0;
-
-    for (int i = 0; i < number_of_tests; ++i)
-        succeeded += test(&tests[i]);
-
-    printf(MAKE_BOLD("Passed %d/%d\n"), succeeded, number_of_tests);
-}
-
