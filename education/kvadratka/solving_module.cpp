@@ -4,21 +4,27 @@
 #define ROOT_1 data -> root_1
 #define ROOT_2 data -> root_2
 
-
+// TODO: doxygen
 // TODO: reorder functions
-// TODO: tests (done)
 // TODO: (!!!) command line arguments (argc argv)
-// TODO: make file tutorial.com
+// TODO: make file
 // TODO: add double check equation - think about it
-// TODO: static
-// TODO: define color functions
+// TODO: define color functions (done)
 // TODO: commit github + meow
 // TODO: diagram for readme (drawio)
+// TODO: move function declaration from h to cpp + add static (done)
+// fixed read from file bug
 
+
+static double calculate_discriminant(double a, double b, double c);
+static bool is_zero(double n);
+static double inspect_zero_root(double raw_root);
+static root_number solve_square_equation(square_equation_data* const data);
+static root_number solve_linear_equation(square_equation_data* const data);
 
 
 // bx + c = 0
-root_number solve_linear_equation(square_equation_data* const data)
+static root_number solve_linear_equation(square_equation_data* const data)
 {
     assert(data != NULL);
     assert(isfinite(B_KOEF));
@@ -39,7 +45,7 @@ root_number solve_linear_equation(square_equation_data* const data)
 }
 
 
-double inspect_zero_root(double raw_root)
+static double inspect_zero_root(double raw_root)
 {
     if (is_zero(raw_root))
             raw_root = 0.0;
@@ -47,7 +53,7 @@ double inspect_zero_root(double raw_root)
 }
 
 
-double calculate_discriminant(double a, double b, double c)
+static double calculate_discriminant(double a, double b, double c)
 {
     assert(isfinite(a));
     assert(isfinite(b));
@@ -59,7 +65,7 @@ double calculate_discriminant(double a, double b, double c)
 
 
 // ax^2 + bx + c = 0
-root_number solve_square_equation(square_equation_data* const data) // TODO: name check
+static root_number solve_square_equation(square_equation_data* const data) // TODO: name check
 {
     assert(data != NULL);
     assert(isfinite(A_KOEF));
@@ -107,7 +113,7 @@ root_number solve_equation(square_equation_data* const data)
 }
 
 
-bool is_zero(double n)
+static bool is_zero(double n)
 {
     if (!isfinite(n))
         return false;

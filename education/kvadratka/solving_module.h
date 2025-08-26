@@ -34,13 +34,9 @@ struct square_equation_data
 
 const double EPSILON = 10e-3;
 
-root_number solve_square_equation(square_equation_data* const data);
-root_number solve_linear_equation(square_equation_data* const data);
+
 root_number solve_equation(square_equation_data* const data);
-double calculate_discriminant(double a, double b, double c);
 bool is_equal(double a, double b);
-bool is_zero(double n);
-double inspect_zero_root(double raw_root);
 
 
 #endif

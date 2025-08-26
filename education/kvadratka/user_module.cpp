@@ -1,24 +1,21 @@
-#include "solving_module.h"
-#include "font_styles.h"
+#include "user_module.h"
 
 
 enum program_states {OFF, ON};
 
 
-void read_koef(double* const koefs); // do I need const here?
-void print_ans(root_number number_of_roots, square_equation_data data);
-void clear_buffer(void);
-bool check_buffer();
-program_states ask_for_new_equations(void);
+static void read_koef(double* const koefs);
+static void print_ans(root_number number_of_roots, square_equation_data data);
+static void clear_buffer(void);
+static bool check_buffer();
+static program_states ask_for_new_equations(void);
 
 
-int main()
+void run_user_inteface(void)
 {
     double koefs[3] = {};
 
     int program_state = ON;
-
-    printf(BOLD "+++ Square Equation Solver +++\n\n" RESET_FONT);
 
     while (program_state == ON)
     {
@@ -33,11 +30,10 @@ int main()
 
         program_state = ask_for_new_equations();
     }
-    return 0;
 }
 
 
-program_states ask_for_new_equations(void)
+static program_states ask_for_new_equations(void)
 {
     printf("Any new equations? (no - 0, yes - 1): ");
 
@@ -62,14 +58,14 @@ program_states ask_for_new_equations(void)
 }
 
 
-void clear_buffer(void)
+static void clear_buffer(void)
 {
     int c = '\0';
     while ((c = getchar()) != '\n' && c != EOF);
 }
 
 
-bool check_buffer()
+static bool check_buffer()
 {
     int c = 0;
     while ((c = getchar()) != EOF && c != '\n')
@@ -79,9 +75,9 @@ bool check_buffer()
 }
 
 
-void read_koef(double* const koefs)
+static void read_koef(double* const koefs)
 {
-    // TODO: add asserts
+    assert(koefs != NULL);
 
     printf("Enter a, b, c parameters for equation ax^2 + bx + c = 0:\n");
 
@@ -95,7 +91,7 @@ void read_koef(double* const koefs)
 }
 
 
-void print_ans(root_number number_of_roots, square_equation_data data)
+static void print_ans(root_number number_of_roots, square_equation_data data)
 {
     assert(isfinite(data.root_1));
     assert(isfinite(data.root_2));
