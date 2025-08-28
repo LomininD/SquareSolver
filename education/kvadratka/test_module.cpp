@@ -1,4 +1,4 @@
-#include <stdlib.h>
+//#include <stdlib.h>
 #include "test_module.h"
 
 
@@ -18,7 +18,6 @@ void run_tests(void)
     printf("(unit test mode)\n");
 
     FILE *fp = fopen("tests.txt", "r"); // TODO: path to tests as flag(--test=Path(test.txt))
-                                        // close
                                         // TODO: add to fuction read_tests
     int number_of_tests = 0;
     fscanf(fp, "%d\n", &number_of_tests);
@@ -29,6 +28,7 @@ void run_tests(void)
     test_solve_equation(tests, number_of_tests);
 
     free(tests);
+    fclose(fp);
 }
 
 

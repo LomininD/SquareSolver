@@ -5,11 +5,9 @@
 #define ROOT_2 data -> root_2
 
 
-// TODO: reorder function declaration 
+// TODO: reorder function declaration
 // TODO: doxygen
-// TODO: reorder functions (done)
-// TODO: (!!!) command line arguments (argc argv) (done)
-// TODO: make file
+// TODO: README
 // TODO: diagram for readme (drawio)
 
 
