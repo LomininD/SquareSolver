@@ -17,8 +17,7 @@ void run_tests(void)
 {
     printf("(unit test mode)\n");
 
-    FILE *fp = fopen("tests.txt", "r"); // TODO: path to tests as flag(--test=Path(test.txt))
-                                        // TODO: add to fuction read_tests
+    FILE *fp = fopen("tests.txt", "r");
     int number_of_tests = 0;
     fscanf(fp, "%d\n", &number_of_tests);
     test_data* tests = (test_data*) calloc((size_t)number_of_tests, sizeof(test_data));

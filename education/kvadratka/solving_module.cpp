@@ -7,9 +7,8 @@
 
 // TODO: reorder function declaration
 // TODO: doxygen
-// TODO: README
-// TODO: diagram for readme (drawio)
-// TODO: add more unit tests
+// TODO: path to tests as flag(--test=Path(test.txt))
+// TODO: add open file to fuction read_tests
 
 
 static double calculate_discriminant(double a, double b, double c);
@@ -103,6 +102,8 @@ static double calculate_discriminant(double a, double b, double c)
 
 static double inspect_zero_root(double raw_root)
 {
+    assert(isfinite(raw_root));
+
     if (is_zero(raw_root))
             raw_root = 0.0;
     return raw_root;

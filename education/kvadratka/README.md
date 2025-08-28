@@ -2,14 +2,25 @@ Quadratic equation solver
 =========================
 This program allow user to solve multiple quadratic equations.
 
+Building the program
+--------------------
+
+To make a build use ```Makefile```. Run this code in terminal:
+
+```
+make
+```
+
+The builded version will be stored in ```solver``` file
+
 Launching the program
 ---------------------
 
 To launch the program you should enter in terminal:
 ```
-./solver -your_launch_flag
+./solver --your_launch_flag
 ```
-*Note: replace ```-your_launch_flag``` with on of the launch flags presented below.*
+*Note: replace ```--your_launch_flag``` with on of the launch flags presented below.*
 
 **Launch flags** - information that shows in which mode you would like to launch the program.
 
@@ -17,12 +28,12 @@ To launch the program you should enter in terminal:
 You may launch the program in different modes by using these flags in the terminal:
 |  Flag |                      Effect                     |
 |:-----:|:-----------------------------------------------:|
-| ```-user``` | launches program's user interface               |
-| ```-test``` | launches unit-tests for program                 |
-| ```-all```  | combines -user and -test flags (developer mode) |
-| ```-help``` | provides information about launch flags         |
+| ```--user (-u)``` | launches program's user interface               |
+| ```--test (-t)``` | launches unit-tests for program                 |
+| ```--all (-a)```  | combines -user and -test flags (developer mode) |
+| ```--help (-h)``` | provides information about launch flags         |
 
-If you didn't enter any launch flags the ```-help``` flag will be used automatically.
+If you didn't enter any launch flags the ```--help``` flag will be used automatically.
 
 User mode
 ---------
@@ -36,7 +47,7 @@ In any case if the input data is incorrect (for example you entered string value
 Unit-test mode
 --------------
 
-If you launched the program in unit-test mode it will run unit tests that are stored in ```test.txt``` file.
+If you launched the program in unit-test mode it will run unit tests that are stored in ```tests.txt``` file.
 
 The output will provide you the information about test result. There are two options of it:
 
@@ -52,7 +63,7 @@ Program Structure
 
 The diagram below shows the structure of the program:
 
-![Program structure](Program_structure.png)
+![Program structure](Run_process.png)
 
 Сalculation accuracy
 --------------------
