@@ -9,6 +9,7 @@
 // TODO: doxygen
 // TODO: README
 // TODO: diagram for readme (drawio)
+// TODO: add more unit tests
 
 
 static double calculate_discriminant(double a, double b, double c);
