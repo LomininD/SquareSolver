@@ -1,0 +1,7 @@
+6
+a = 1,  b = 2,  c = 1,  correct_number_of_roots = ONE_ROOT,  correct_root_1 = -1, correct_root_2 = 0
+a = 0,  b = 0,  c = 1,  correct_number_of_roots = NO_ROOTS,  correct_root_1 = 0,  correct_root_2 = 0
+a = 1,  b = -5, c = 6,  correct_number_of_roots = TWO_ROOTS, correct_root_1 = 2,  correct_root_2 = 3
+a = 0,  b = 1,  c = 2,  correct_number_of_roots = ONE_ROOT,  correct_root_1 = -2, correct_root_2 = 0
+a = 0,  b = 0,  c = 0,  correct_number_of_roots = INF_ROOTS, correct_root_1 = 0,  correct_root_2 = 0
+a = 1,  b = 0,  c = 0,  correct_number_of_roots = ONE_ROOT,  correct_root_1 = 0,  correct_root_2 = 0

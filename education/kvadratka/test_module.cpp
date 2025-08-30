@@ -11,23 +11,34 @@ static void test_solve_equation(test_data* tests, int number_of_tests);
 static int test(test_data* data);
 static root_number str_to_root_number(char str[]);
 static void read_tests(FILE* fp, int number_of_tests, test_data* tests);
+static test_data* read_from_file(FILE* fp, int* number_of_tests);
 
-
-void run_tests(void)
+void run_tests(const char * test_file)
 {
     printf("(unit test mode)\n");
 
-    FILE *fp = fopen("tests.txt", "r");
-    int number_of_tests = 0;
-    fscanf(fp, "%d\n", &number_of_tests);
-    test_data* tests = (test_data*) calloc((size_t)number_of_tests, sizeof(test_data));
+    FILE *fp = fopen(test_file, "r");
 
-    read_tests(fp, number_of_tests, tests);
+    int number_of_tests = 0;
+
+    test_data *tests = read_from_file(fp, &number_of_tests);
 
     test_solve_equation(tests, number_of_tests);
 
     free(tests);
     fclose(fp);
+}
+
+
+static test_data* read_from_file(FILE* fp, int* number_of_tests)
+{
+
+    fscanf(fp, "%d\n", number_of_tests);
+    test_data* tests = (test_data*) calloc((size_t)(*number_of_tests), sizeof(test_data));
+
+    read_tests(fp, *number_of_tests, tests);
+
+    return tests;
 }
 
 
@@ -57,13 +68,13 @@ static void read_tests(FILE* fp, int number_of_tests, test_data* tests)
 
 static root_number str_to_root_number(char str[])
 {
-    if (!strcmp(str, "NO_ROOTS"))
+    if (strcmp(str, "NO_ROOTS") == 0)
         return NO_ROOTS;
-    else if (!strcmp(str, "ONE_ROOT"))
+    else if (strcmp(str, "ONE_ROOT") == 0)
         return ONE_ROOT;
-    else if (!strcmp(str, "TWO_ROOTS"))
+    else if (strcmp(str, "TWO_ROOTS") == 0)
         return TWO_ROOTS;
-    else // if (strcmp(str, "INF_ROOTS")):
+    else // if (strcmp(str, "INF_ROOTS") == 0):
         return INF_ROOTS;
 }
 

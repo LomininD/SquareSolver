@@ -5,10 +5,9 @@
 #define ROOT_2 data -> root_2
 
 
-// TODO: reorder function declaration
+
 // TODO: doxygen
-// TODO: path to tests as flag(--test=Path(test.txt))
-// TODO: add open file to fuction read_tests
+// TODO: store flags in structure
 
 
 static double calculate_discriminant(double a, double b, double c);

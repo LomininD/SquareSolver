@@ -3,10 +3,11 @@
 
 
 static void print_help(void);
-static void determine_mode(int argc, char* argv[]);
+static void determine_mode(int argc, const char* argv[]);
 
 
-int main(int argc, char* argv[])
+
+int main(int argc, const char* argv[])
 {
     //printf(MAKE_BOLD_RED ("MEOW\n"));
 
@@ -22,7 +23,7 @@ int main(int argc, char* argv[])
 }
 
 
-static void determine_mode(int argc, char* argv[])
+static void determine_mode(int argc, const char* argv[])
 {
     assert(argv != NULL);
 
@@ -32,20 +33,27 @@ static void determine_mode(int argc, char* argv[])
             print_help();
             break;
         default:
-            if (!strcmp(argv[1], "--test") || !strcmp(argv[1], "-t"))
+            if (strcmp(argv[1], "--test") == 0 || strcmp(argv[1], "-t") == 0)
             {
-                run_tests();
+                if (argc == 3)
+                {
+                    run_tests(argv[2]);
+                }
+                else
+                {
+                    run_tests("tests.txt");
+                }
             }
-            else if (!strcmp(argv[1], "--user") || !strcmp(argv[1], "-u"))
+            else if (strcmp(argv[1], "--user") == 0 || strcmp(argv[1], "-u") == 0)
             {
                 run_user_interface();
             }
-            else if (!strcmp(argv[1], "--all") || !strcmp(argv[1], "-a"))
+            else if (strcmp(argv[1], "--all") == 0 || strcmp(argv[1], "-a") == 0)
             {
-                run_tests();
+                run_tests("tests.txt");
                 run_user_interface();
             }
-            else if (!strcmp(argv[1], "--help") || !strcmp(argv[1], "-help"))
+            else if (strcmp(argv[1], "--help") == 0 || strcmp(argv[1], "-help") == 0)
             {
                 print_help();
             }

@@ -37,6 +37,7 @@ const double EPSILON = 10e-3;
 
 root_number solve_equation(quadratic_equation_data* const data);
 bool is_equal(double a, double b);
+void run_tests(char file[]);
 
 
 #endif

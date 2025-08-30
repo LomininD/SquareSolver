@@ -17,6 +17,6 @@ struct test_data
     double correct_root_2;
 };
 
-void run_tests(void);
+void run_tests(const char * test_file);
 
 #endif
